@@ -35,7 +35,6 @@ function willYouMarryMe(isPositiveAnswer) {
   });
 }
 
-
 /**
  * Return Promise object that should be resolved with array containing plain values.
  * Function receive an array of Promise objects.
