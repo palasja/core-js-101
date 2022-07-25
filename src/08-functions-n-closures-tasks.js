@@ -112,13 +112,13 @@ function memoize(func) {
 function retry(/* func, attempts */) {
   throw new Error('Not implemented');
   // return () => {
-  //   let a;
+  //   let b;
   //   try {
-  //     a = func();
+  //     b = func();
   //   } catch (e) {
   //     if (attempts !== 0) retry(func, attempts - 1);
   //   }
-  //   return a;
+  //   return b;
   // };
 }
 
