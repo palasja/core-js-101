@@ -97,8 +97,11 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  if (a <= 0 || b <= 0 || c <= 0) return false;
+
+  if (a + b > c && a + c > b && c + b > a) return true;
+  return false;
 }
 
 
@@ -134,8 +137,25 @@ function isTriangle(/* a, b, c */) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+//   struct rect
+// {
+//     int x;
+//     int y;
+//     int width;
+//     int height;
+// };
+
+  const valueInRange = (value, min, max) => (value >= min) && (value <= max);
+
+
+  const xOverlap = valueInRange(rect1.left, rect2.left, rect2.left + rect2.width)
+                    || valueInRange(rect2.left, rect1.left, rect1.left + rect1.width);
+
+  const yOverlap = valueInRange(rect1.top, rect2.top, rect2.top + rect2.height)
+                    || valueInRange(rect2.top, rect1.top, rect1.top + rect1.height);
+
+  return xOverlap && yOverlap;
 }
 
 
@@ -165,8 +185,8 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  return (circle.center.x - point.x) ** 2 + (circle.center.y - point.y) ** 2 < circle.radius ** 2;
 }
 
 
