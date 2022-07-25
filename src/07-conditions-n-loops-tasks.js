@@ -444,7 +444,6 @@ function getMatrixProduct(m1, m2) {
       for (let j = 0; j < m2.length; j += 1) {
         sum += row[j] * m2[j][k];
       }
-      console.log(res);
       res[i][k] = sum;
     }
   }
