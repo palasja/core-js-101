@@ -111,14 +111,12 @@ function memoize(func) {
  */
 function retry(/* func, attempts */) {
   throw new Error('Not implemented');
-  // let count = 0;
   // return () => {
-  //   let a = 0;
+  //   let a;
   //   try {
   //     a = func();
   //   } catch (e) {
-  //     count += 1;
-  //     if (count !== attempts) func();
+  //     if (attempts !== 0) retry(func, attempts - 1);
   //   }
   //   return a;
   // };
@@ -148,18 +146,30 @@ function retry(/* func, attempts */) {
  * cos(3.141592653589793) ends
  *
  */
-function logger(/* func, logFunc */) {
-  throw new Error('Not implemented');
-  // return (...args) => {
-
-  //   const logStr = `${func.name}(${args})`;
-  //   logFunc(`${logStr} starts`);
-  //   try {
-  //     return func(...args);
-  //   } finally {
-  //     logFunc(`${logStr} ends`);
-  //   }
-  // };
+function logger(func, logFunc) {
+  // throw new Error('Not implemented');
+  return (...args) => {
+    let logStr = `${func.name}(`;
+    args.forEach((el) => {
+      if (Array.isArray(el)) {
+        let arrStr = '[';
+        el.forEach((nes) => {
+          if (typeof nes === 'string') arrStr += `"${nes}",`;
+          if (typeof nes === 'number') arrStr += `${nes},`;
+        });
+        logStr += `${arrStr.slice(0, -1)}],`;
+      } else {
+        logStr += `${el},`;
+      }
+    });
+    logStr = `${logStr.slice(0, -1)})`;
+    logFunc(`${logStr} starts`);
+    try {
+      return func(...args);
+    } finally {
+      logFunc(`${logStr} ends`);
+    }
+  };
 }
 
 
